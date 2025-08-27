@@ -4,87 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMAGIFY - AI Image Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="glass">
+<body>
     <!-- Landing Page -->
-    <div id="landingPage" class="landing-page">
-        <div class="hero-section">
-            <h1 class="hero-title">IMAGIFY</h1>
-            <p class="hero-subtitle">Your imagination, instantly visualized</p>
-            
-            <!-- Template Prompts Carousel -->
-            <div class="carousel-container">
-                <ul class="carousel-list" id="carouselList">
-                    <li class="carousel-item active">Anime Girl/Boy Portrait</li>
-                    <li class="carousel-item">Futuristic City / Cyberpunk Scene</li>
-                    <li class="carousel-item">Realistic Portrait / Artwork</li>
-                    <li class="carousel-item">Fantasy Creature / Animal</li>
-                    <li class="carousel-item">Digital Painting / Concept Art</li>
-                </ul>
-            </div>
-            
-            <button id="launchButton" class="launch-button">Launch Tool</button>
+    <div id="landingPage" class="page active">
+        <div class="landing-container">
+            <header class="landing-header">
+                <div class="logo">
+                    <h1 class="logo-text">IMAGIFY</h1>
+                    <span class="logo-subtitle">AI Powered</span>
+                </div>
+                <nav class="nav-menu">
+                    <button class="hamburger" id="hamburgerBtn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </nav>
+            </header>
+
+            <main class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="title-main">IMAGIFY</span>
+                        <span class="title-subtitle">Your imagination, instantly visualized</span>
+                    </h1>
+                    
+                    <div class="template-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-track" id="carouselTrack">
+                                <!-- Template prompts will be populated by JS -->
+                            </div>
+                        </div>
+                        <div class="carousel-dots" id="carouselDots"></div>
+                    </div>
+
+                    <button class="launch-btn" id="launchBtn">
+                        <span class="btn-text">Launch Tool</span>
+                        <span class="btn-glow"></span>
+                    </button>
+                </div>
+            </main>
+
+            <footer class="landing-footer">
+                <p>Developed by <button class="dev-credit" id="devCreditBtn">WaizMarco🌹</button></p>
+            </footer>
         </div>
-        
-        <footer class="developer-credit">
-            <a href="#" id="creditLink">Developed by WaizMarco</a>
-        </footer>
     </div>
 
     <!-- Main Tool Interface -->
-    <div id="mainTool" class="main-tool hidden">
-        <!-- Header Bar -->
-        <header class="header-bar">
+    <div id="toolPage" class="page">
+        <header class="tool-header">
             <div class="header-content">
-                <button id="homeButton" class="home-button">IMAGIFY</button>
-                <div class="header-right">
-                    <span class="credit-pill" id="creditPill">Credits: 2</span>
-                    <button class="hamburger-btn" id="hamburgerBtn">
-                        <span class="hamburger-icon">☰</span>
+                <div class="logo-small">
+                    <span class="logo-text">IMAGIFY</span>
+                </div>
+                <div class="header-controls">
+                    <div class="credits-display">
+                        <span class="credits-label">Credits:</span>
+                        <span class="credits-count" id="creditsCount">2</span>
+                    </div>
+                    <button class="hamburger" id="hamburgerBtn2">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </button>
                 </div>
             </div>
         </header>
 
-        <!-- Main Panel -->
-        <main class="main-panel" id="mainPanel">
-            <div id="pageContent" class="page-content">
-                <!-- Generator Interface -->
-                <div class="generator-section">
+        <main class="tool-main">
+            <div class="generator-section">
+                <div class="generator-card">
+                    <h2 class="section-title">Generate Image</h2>
+                    
                     <div class="form-group">
-                        <label for="modelSelect" class="form-label">Select Model:</label>
-                        <select id="modelSelect" class="form-control">
-                            <option value="Hugging Face">Hugging Face</option>
-                            <option value="DeepAI">DeepAI</option>
+                        <label for="modelSelect" class="form-label">AI Model</label>
+                        <select id="modelSelect" class="form-select">
+                            <option value="huggingface">Stable Diffusion (HuggingFace)</option>
+                            <option value="deepai">DeepAI Text2Image</option>
                         </select>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="prompt" class="form-label">Enter your prompt:</label>
-                        <textarea id="prompt" class="form-control prompt-textarea" rows="4" placeholder="Anime Girl/Boy Portrait"></textarea>
-                    </div>
-                    
-                    <button id="generateBtn" class="btn btn--primary generate-btn">Generate Image</button>
-                    
-                    <p class="tip-text" id="tipText">Write your idea in detail. You have 2 free credits.</p>
-                </div>
 
-                <!-- Output Section -->
-                <div id="output" class="output-section">
-                    <h3>Generated Images</h3>
-                    <div id="imageGrid" class="image-grid"></div>
+                    <div class="form-group">
+                        <label for="promptInput" class="form-label">Describe your image</label>
+                        <textarea 
+                            id="promptInput" 
+                            class="form-textarea" 
+                            placeholder="Enter your creative prompt here..."
+                            rows="4"
+                        ></textarea>
+                    </div>
+
+                    <div class="template-suggestions">
+                        <p class="suggestions-label">Quick Templates:</p>
+                        <div class="suggestion-tags" id="suggestionTags">
+                            <!-- Template suggestions will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <button class="generate-btn" id="generateBtn">
+                        <span class="btn-content">
+                            <span class="btn-text">Generate Image</span>
+                            <span class="btn-spinner hidden">
+                                <span class="spinner"></span>
+                                Generating...
+                            </span>
+                        </span>
+                        <span class="btn-glow"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="output-header">
+                    <h3 class="section-title">Generated Images</h3>
+                </div>
+                <div class="image-grid" id="imageGrid">
+                    <div class="placeholder-message">
+                        <div class="placeholder-icon">🎨</div>
+                        <p>Your generated images will appear here</p>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Navigation Overlay -->
-    <div id="navOverlay" class="nav-overlay hidden">
+    <!-- Navigation Menu Overlay -->
+    <div class="nav-overlay hidden" id="navOverlay">
         <div class="nav-content">
-            <button class="nav-close" id="navClose">&times;</button>
-            <nav class="nav-menu">
-                <a href="#" class="nav-link" data-page="home">Home</a>
+            <button class="nav-close" id="navCloseBtn">&times;</button>
+            <nav class="nav-links">
+                <a href="#" class="nav-link" data-page="landing">Home</a>
                 <a href="#" class="nav-link" data-page="about">About</a>
                 <a href="#" class="nav-link" data-page="faq">FAQ</a>
                 <a href="#" class="nav-link" data-page="contact">Contact</a>
@@ -92,42 +147,70 @@
         </div>
     </div>
 
-    <!-- Credit Modal -->
-    <div id="creditModal" class="modal hidden">
+    <!-- Modals -->
+    <!-- Developer Credit Modal -->
+    <div class="modal hidden" id="devModal">
+        <div class="modal-overlay"></div>
         <div class="modal-content">
-            <button class="modal-close" id="modalClose">&times;</button>
-            <h3>Developer Credits</h3>
-            <p>IMAGIFY was developed by <strong>WaizMarco</strong></p>
-            <p>A passionate developer creating innovative AI-powered tools for creative professionals and enthusiasts.</p>
-            <p>Contact: waizmarco@example.com</p>
-            <p>Thank you for using IMAGIFY!</p>
-        </div>
-    </div>
-
-    <!-- Unlock Modal -->
-    <div id="unlockModal" class="modal hidden">
-        <div class="modal-content">
-            <button class="modal-close" id="unlockModalClose">&times;</button>
-            <h3>Unlock Unlimited Credits</h3>
-            <p>You've used all your free credits. Enter the unlock code to get unlimited access:</p>
-            <div class="form-group">
-                <input type="password" id="unlockPassword" class="form-control" placeholder="Enter unlock code">
+            <button class="modal-close" data-modal="devModal">&times;</button>
+            <h3>About Developer</h3>
+            <div class="developer-info">
+                <div class="dev-avatar">🌹</div>
+                <h4>WaizMarco</h4>
+                <p>Full Stack Developer & AI Enthusiast</p>
+                <div class="dev-links">
+                    <a href="#" target="_blank" class="dev-link">Portfolio</a>
+                    <a href="#" target="_blank" class="dev-link">GitHub</a>
+                </div>
             </div>
-            <button id="unlockBtn" class="btn btn--primary">Unlock</button>
-            <p class="unlock-hint">Hint: The unlock code is available from the developer</p>
         </div>
     </div>
 
-    <!-- Loading Spinner -->
-    <div id="loadingSpinner" class="loading-spinner hidden">
-        <div class="spinner"></div>
-        <p>Generating your image...</p>
-        <p class="loading-detail">This may take a few seconds</p>
+    <!-- Credits Modal -->
+    <div class="modal hidden" id="creditsModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" data-modal="creditsModal">&times;</button>
+            <h3>Unlock Unlimited Credits</h3>
+            <p>Enter the unlock password to get unlimited image generations:</p>
+            <div class="password-form">
+                <input type="password" id="unlockPassword" class="form-input" placeholder="Enter password">
+                <button class="unlock-btn" id="unlockBtn">Unlock</button>
+            </div>
+            <p class="unlock-hint">Contact WaizMarco🌹 for the unlock password</p>
+        </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast hidden">
-        <span id="toastMessage"></span>
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- About Page Content -->
+    <div class="page-content hidden" id="aboutContent">
+        <h2>About IMAGIFY</h2>
+        <p>IMAGIFY is a cutting-edge AI image generator that transforms your imagination into stunning visual art. Using advanced machine learning models, we provide professional-grade image generation capabilities.</p>
+    </div>
+
+    <!-- FAQ Page Content -->
+    <div class="page-content hidden" id="faqContent">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h4>How many images can I generate?</h4>
+            <p>You start with 2 free credits. Contact WaizMarco🌹 for unlimited access.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What AI models do you use?</h4>
+            <p>We use Stable Diffusion and DeepAI models for high-quality image generation.</p>
+        </div>
+    </div>
+
+    <!-- Contact Page Content -->
+    <div class="page-content hidden" id="contactContent">
+        <h2>Contact</h2>
+        <p>For support or inquiries, reach out to:</p>
+        <div class="contact-info">
+            <p><strong>Developer:</strong> WaizMarco🌹</p>
+            <p><strong>Email:</strong> contact@waizmarco.dev</p>
+        </div>
     </div>
 
     <script src="app.js"></script>
