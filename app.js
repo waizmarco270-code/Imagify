@@ -48,11 +48,11 @@ class ImagifyApp {
                 }
             },
             apiKeys: {
-                huggingface: "YOUR_HF_API_KEY_HERE",
+                huggingface: "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",
                 deepai: "YOUR_DEEPAI_API_KEY_HERE"
             },
             settings: {
-                defaultCredits: 2,
+                defaultCredits: 3,
                 unlockPassword: "marcowaizextra",
                 themeRotationInterval: 45000,
                 carouselInterval: 4000
